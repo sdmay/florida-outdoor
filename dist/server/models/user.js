@@ -6,6 +6,21 @@ var userSchema = new mongoose.Schema({
     username: String,
     email: { type: String, unique: true, lowercase: true, trim: true },
     password: String,
+    createdDate: { type: Date, default: Date.now },
+    verified: { type: Boolean, default: false },
+    modified: { type: Date, default: false },
+    modifiedat: { type: Date, required: false },
+    homebase: { type: String },
+    posts: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Post',
+            required: false
+        }],
+    comments: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment',
+            required: false
+        }],
     role: String
 });
 // Before saving the user, hash the password
